@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>model-binding.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>model-binding.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>$(<span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>create a instance of Backbone Model with some default values.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="keyword">var</span> BaseViewModel = <span class="keyword">new</span> Backbone.Model();
+    BaseViewModel.set({
+            <span class="string">"firstName"</span>: <span class="string">""</span>,
+            <span class="string">"lastName"</span>: <span class="string">""</span>,
+            <span class="string">"salary"</span>: <span class="string">""</span>,
+            <span class="string">"pro"</span>: <span class="literal">true</span>
+    });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>create a converter function, that formats the 
+given value as money, for example 123 gets converted to
+$123.00, used by the money input.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="keyword">var</span> salaryConverter = <span class="function"><span class="keyword">function</span> <span class="params">(direction, value)</span> {</span>
+        <span class="keyword">if</span> (direction === <span class="string">"ModelToView"</span>) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>format only when the direction is from model to view</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">return</span> accounting.formatMoney(value);
+        } <span class="keyword">else</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>from view to model, just store the plain value</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">return</span> value;
+        }
+    };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>create  a Backbone view</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="keyword">var</span> BaseView = Backbone.View.extend({</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>local variable for model binder</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        _modelBinder: <span class="literal">undefined</span>,
+        initialize: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>on view initialize, initialize _modelBinder</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">this</span>._modelBinder = <span class="keyword">new</span> Backbone.ModelBinder();
+        },
+        close: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>when view closes, unbind Model bindings</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">this</span>._modelBinder.unbind();
+        },
+        render: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>when the view is rendered
+get the templated id from passed in options
+NOTE: templateId is not a property of Backbone or       ModelBinder, its a custom parameter that we pass into view&#39;s constructor</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>           
+            <span class="keyword">var</span> templateId = <span class="string">"#"</span> + <span class="keyword">this</span>.options.templateId;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>construct the template</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">var</span> template = _.template($(templateId).html());
+            <span class="keyword">var</span> templateHTML = template();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>append it to current view</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">this</span>.$el.html(templateHTML);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>get the bindings attribute from passed options
+NOTE: bindings is not a property of Backbone, its a custom parameter that we pass into view&#39;s constructor</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">var</span> bindings = <span class="keyword">this</span>.options.bindings;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>call modelBinder bind api to apply bindings on the current view</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">this</span>._modelBinder.bind(
+            <span class="keyword">this</span>.model <span class="comment">/*the model to bind*/</span> ,
+            <span class="keyword">this</span>.el <span class="comment">/*root element*/</span> ,
+            bindings <span class="comment">/*bindings*/</span> );
+
+            <span class="keyword">return</span> <span class="keyword">this</span>;
+        }
+    });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>bindings for editor view:
+firstName attribute on the model to element with name property set to firstName
+lastName attribute on the model to element with name property set to lastName
+salary attribute on the model to element with name property set to salary, also passin a construction function, so that the value is formatted as money
+favSearch attribute on the model to element with name property set to favSearch</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="keyword">var</span> editorViewBindings = {
+            <span class="string">"firstName"</span>: <span class="string">'[name = "firstName"]'</span>, 
+            <span class="string">"lastName"</span>: <span class="string">'[name = "lastName"]'</span>,
+            <span class="string">"salary"</span>: {
+            selector: <span class="string">'[name = "salary"]'</span>,
+            converter: salaryConverter
+        },
+            <span class="string">"pro"</span>: <span class="string">'[name = "pro"]'</span>,
+            <span class="string">"favSearch"</span>: <span class="string">'[name = "favSearch"]'</span>
+    };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>instantiate the editor view by passing the model, tempalte id and 
+bindings into the constructor</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="keyword">var</span> myEditorView = <span class="keyword">new</span> BaseView({
+        model: BaseViewModel,
+        templateId: <span class="string">"editor-template"</span>,
+        bindings: editorViewBindings
+    });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>bindings for viewer view:
+firstName attribute on the model to element with name property set to firstName
+lastName attribute on the model to element with name property set to lastName
+salary attribute on the model to element with name property set to salary, also passin a construction function, so that the value is formatted as money
+favSearch attribute on the model to element with name property set to favSearch, Notice that there are two bindings here (set as an array),
+the reason for this is, on the preview view, we are binding 
+favSearch to an anchor, so we want to update the anchor label
+as well as the &#39;href&#39; property on the anchor. to achieve this
+we make use of &#39;elAttribute&#39; in the bindings, which says that, bind favSearch to a el with name &#39;favSearch&#39; and the attribute to bind this is &#39;href&#39;.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    
+    <span class="keyword">var</span> viewerBindings = {
+        <span class="string">"firstName"</span>: <span class="string">'[name = "firstName"]'</span>,
+            <span class="string">"lastName"</span>: <span class="string">'[name = "lastName"]'</span>,
+            <span class="string">"salary"</span>: {
+            selector: <span class="string">'[name = "salary"]'</span>,
+            converter: salaryConverter
+        },
+            <span class="string">"pro"</span>: <span class="string">'[name = "pro"]'</span>,
+            <span class="string">"favSearch"</span>: [{
+            selector: <span class="string">'[name = "favSearch"]'</span>,
+            elAttribute: <span class="string">"href"</span>
+        }, {
+            selector: <span class="string">'[name = "favSearch"]'</span>
+        }]
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>instantiate the viewer view by passing the model, tempalte id and 
+bindings into the constructor</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="keyword">var</span> myViewerView = <span class="keyword">new</span> BaseView({
+        model: BaseViewModel,
+        templateId: <span class="string">"viewer-template"</span>,
+        bindings: viewerBindings
+    });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>append both the Backbone views to the container</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    $(<span class="string">".container"</span>).append(myEditorView.render().$el);
+    $(<span class="string">".container"</span>).append(myViewerView.render().$el);
+
+});</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
