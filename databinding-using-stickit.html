@@ -132,10 +132,7 @@ NOTE: templateId is not a property of Backbone or Backbone Stickit, its a custom
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>			<span class="keyword">this</span>.$el.html(templateHTML);
-			<span class="keyword">this</span>.stickit(<span class="keyword">this</span>.model,<span class="keyword">this</span>.options.bindings);
-			<span class="keyword">return</span> <span class="keyword">this</span>;
-		},</pre></div></div>
+            <div class="content"><div class='highlight'><pre>			<span class="keyword">this</span>.$el.html(templateHTML);</pre></div></div>
             
         </li>
         
@@ -145,6 +142,23 @@ NOTE: templateId is not a property of Backbone or Backbone Stickit, its a custom
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>call stickit to apply view model bindings</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>			<span class="keyword">this</span>.stickit(<span class="keyword">this</span>.model,<span class="keyword">this</span>.options.bindings);
+			<span class="keyword">return</span> <span class="keyword">this</span>;
+		},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
               <p>create a converter function, that formats the 
 given value as money, for example 123 gets converted to
@@ -160,11 +174,11 @@ $123.00, used by the money input.</p>
         </li>
         
         
-        <li id="section-9">
+        <li id="section-10">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-9">&#182;</a>
+                <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <p>bindings for editor view:
 firstName attribute on the model to element with name property set to firstName.
@@ -188,11 +202,11 @@ favSearch attribute on the model to element with name property set to favSearch.
         </li>
         
         
-        <li id="section-10">
+        <li id="section-11">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-10">&#182;</a>
+                <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
               <p>instantiate the editor view by passing the model, tempalte id and 
 bindings into the constructor</p>
@@ -208,11 +222,11 @@ bindings into the constructor</p>
         </li>
         
         
-        <li id="section-11">
+        <li id="section-12">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-11">&#182;</a>
+                <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <p>bindings for viewer view:
 firstName attribute on the model to element with name property set to firstName.
@@ -246,11 +260,11 @@ we make use of &#39;update&#39; call back function in the bindings, which give t
         </li>
         
         
-        <li id="section-12">
+        <li id="section-13">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-12">&#182;</a>
+                <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
               <p>instantiate the viewer view by passing the model, tempalte id and 
 bindings into the constructor</p>
@@ -266,11 +280,11 @@ bindings into the constructor</p>
         </li>
         
         
-        <li id="section-13">
+        <li id="section-14">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-13">&#182;</a>
+                <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
               <p>append both the Backbone views to the container</p>
 
