@@ -45,6 +45,7 @@ define([
 						   
 		},
 		handleLoadResults : function(data){
+			console.log("view hit");
 			this.model.set(data);
 		}
 	});
