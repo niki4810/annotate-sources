@@ -11,4 +11,8 @@ padding-top : 0px;
 .ui-effects-transfer {
     border: 1px dotted black;
   }
+  
+ .moviePoster{
+ 	width:230px;
+ } 
 
