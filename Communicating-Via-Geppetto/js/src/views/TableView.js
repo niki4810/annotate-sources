@@ -45,6 +45,7 @@ define([
 						   
 		},
 		handleSearchResultsLoaded : function(data){
+			this.model.clear();
 			this.model.set(data);
 		}
 	});
