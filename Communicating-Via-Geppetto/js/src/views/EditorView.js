@@ -31,8 +31,7 @@ define(
 			}else{
 				//if title is not set, shake the text input
 				//should have a required validator, but this would work
-				console.log(this.$('[name = "title"]'));
-				this.$('[name = "title"]').eq(0).effect( "shake" );
+				this.$('[name = "title"]').addClass('animated bounce');
 			}
 		},
 		//local variable for model binder
