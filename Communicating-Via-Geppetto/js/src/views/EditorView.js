@@ -31,6 +31,7 @@ define(
 			}else{
 				//if title is not set, shake the text input
 				//should have a required validator, but this would work
+				console.log(this.$('[name = "title"]'));
 				this.$('[name = "title"]').effect( "shake" );
 			}
 		},
