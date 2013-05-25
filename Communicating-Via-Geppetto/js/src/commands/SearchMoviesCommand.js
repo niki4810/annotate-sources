@@ -6,21 +6,27 @@ define(["jquery","underscore"], function($,_) {
 
 	command.prototype.execute = function() {
 		_.bindAll(this);
-		console.log(this.eventData);
-		var url = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=78ejsdd76tc6jsffmrxjddxu";
-		url += "&q=" + this.eventData.data.get("title");
-		url += "&page_limit=1";
 		var that = this;
-		$.getJSON({
-			url : url,
+
+		var apikey = "78ejsdd76tc6jsffmrxjddxu";
+		var baseUrl = "http://api.rottentomatoes.com/api/public/v1.0";
+		var moviesSearchUrl = baseUrl + '/movies.json?apikey=' + apikey;
+		var query = "Gone with the Wind";
+		var pageLimit = "&page_limit=1";
+
+		$.ajax({
+			url : moviesSearchUrl + '&q=' + encodeURI(query) + pageLimit,
+			dataType : "jsonp",
 			success : function(data) {
 				that.handleDataLoadSuccess(data);
 			},
 			error : function(e) {
 				that.handleDataLoadError(e);
 			}
-		})
-	}; 
+		});
+
+	};
+
 	
 	command.prototype.handleDataLoadSuccess = function(data){
 		console.log(data);
