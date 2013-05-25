@@ -11,7 +11,7 @@ define(["jquery","underscore"], function($,_) {
 		var apikey = "78ejsdd76tc6jsffmrxjddxu";
 		var baseUrl = "http://api.rottentomatoes.com/api/public/v1.0";
 		var moviesSearchUrl = baseUrl + '/movies.json?apikey=' + apikey;
-		var query = "Gone with the Wind";
+		var query = this.eventData.data.get("title");
 		var pageLimit = "&page_limit=1";
 
 		$.ajax({
@@ -30,6 +30,14 @@ define(["jquery","underscore"], function($,_) {
 	
 	command.prototype.handleDataLoadSuccess = function(data){
 		console.log(data);
+		var movies = data.movies;
+		var resultObj = {};
+		resultObj.rated = movies[0].mpaa_rating;
+		resultObj.title = movies[0].title;
+		resultObj.rating = movies[0].ratings.audience_score;
+		resultObj.year = movies[0].year;
+		resultObj.poster = movies[0].posters.detailed;
+		this.context.dispatch("loadResultsEvent",resultObj);
 	};
 	
 	command.prototype.handleDataLoadError = function(e){
