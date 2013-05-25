@@ -11,7 +11,7 @@ define(["jquery","underscore"], function($,_) {
 		url += "&q=" + this.eventData.data.get("title");
 		url += "&page_limit=1";
 		var that = this;
-		$.ajax({
+		$.getJSON({
 			url : url,
 			success : function(data) {
 				that.handleDataLoadSuccess(data);
