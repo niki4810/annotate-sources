@@ -30,7 +30,7 @@ define([
 			//save the passed in context locally  such that
 			// we can dispatch or listen to events on this context
 			this.context = this.options.context;
-			this.context.listen(this, "loadResultsEvent", handleLoadResults);
+			this.context.listen(this, "loadResultsEvent", this.handleLoadResults);
 		},		
 		close : function() {
 			//when view closes, unbind Model bindings
