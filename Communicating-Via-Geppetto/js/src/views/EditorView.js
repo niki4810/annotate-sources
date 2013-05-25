@@ -32,6 +32,11 @@ define(
 				//if title is not set, shake the text input
 				//should have a required validator, but this would work
 				this.$('[name = "title"]').removeClass().addClass('animated bounce');
+                var that = this;
+				var wait = window.setTimeout(function() {
+					that.$('[name = "title"]').removeClass()
+				}, 1300); 
+
 			}
 		},
 		//local variable for model binder
