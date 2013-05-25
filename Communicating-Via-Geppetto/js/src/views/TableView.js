@@ -15,7 +15,7 @@ define([
  	TableTemplate) {
 	var TableView = Marionette.ItemView.extend({
 		template: TableTemplate,
-		className : "well span6 clearfix",
+		className : "well span6",
 		bindings : {
 				"title" : '[name = "title"]',
 				"year" : '[name = "year"]',
