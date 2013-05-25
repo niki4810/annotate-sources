@@ -29,14 +29,13 @@ define(["jquery","underscore"], function($,_) {
 
 	
 	command.prototype.handleDataLoadSuccess = function(data){
-		console.log(data);
 		var movies = data.movies;
 		var resultObj = {};
 		resultObj.rated = movies[0].mpaa_rating;
 		resultObj.title = movies[0].title;
 		resultObj.rating = movies[0].ratings.audience_score;
 		resultObj.year = movies[0].year;
-		resultObj.poster = movies[0].posters.detailed;
+		resultObj.poster = movies[0].posters.original;
 		this.context.dispatch("loadResultsEvent",resultObj);
 	};
 	
