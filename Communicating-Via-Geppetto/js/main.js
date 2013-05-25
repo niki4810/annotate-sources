@@ -15,6 +15,7 @@ require.config({
 		"accounting" : "lib/accounting"
 
 	},
+	urlArgs: "bust=" + (new Date()).getTime(),
 	shim : {
 		jquery : {
 			exports : "$"
