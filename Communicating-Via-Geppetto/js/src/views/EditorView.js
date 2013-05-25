@@ -20,15 +20,19 @@ define(
 		template : EditorTemplate,
 		className : "well span4",
 		bindings : {
-				"title" : '[name = "title"]',
-				"year" : '[name = "year"]'
+				"title" : '[name = "title"]'
 		},
 		events : {
 			"click button.searchBtn" : "searchClicked"
 		},
 		searchClicked : function(e) {
-			console.log(this.model);
+			if(this.model.get("title")){
 			this.context.dispatch("performSearchEvent",{data:this.model});
+			}else{
+				//if title is not set, shake the text input
+				//should have a required validator, but this would work
+				this.$('[name = "title"]').effect( "shake" );
+			}
 		},
 		//local variable for model binder
 		_modelBinder : undefined,
