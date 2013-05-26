@@ -23,7 +23,7 @@ define([
 	var ContainerView = Marionette.ItemView.extend({
 		//set template
 		template : ContainerTemplate,
-		className : "container",
+		className : "container myContainer",
 		initialize : function() {
 			 _.bindAll(this);
 			//create a Geppetto context
