@@ -1,5 +1,6 @@
 define(["jquery", "underscore"], function($, _) {
 
+
 	var command = function() {
 	};
 
@@ -16,13 +17,19 @@ define(["jquery", "underscore"], function($, _) {
 
 		//make an plain jquery ajax call to fetch the movie details using the
 		//rotten tomatoes public api's
+
 		$.ajax({
 			url : moviesSearchUrl + '&q=' + encodeURI(query) + pageLimit,
 			dataType : "jsonp",
 			success : function(data) {
 				that.handleDataLoadSuccess(data);
 			},
-			error : function(jqXHR, textStatus, errorThrown ) {
+			statusCode : {
+				503 : function() {
+					that.handleDataLoadError("page not found");
+				}
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
 				that.handleDataLoadError(errorThrown);
 			}
 		});
@@ -33,7 +40,7 @@ define(["jquery", "underscore"], function($, _) {
 		var movies = data.movies;
 
 		if (!data || !data.movies || data.movies.length <= 0) {
-			//when there are no movies dispatch an error event 
+			//when there are no movies dispatch an error event
 			this.context.dispatch("loadResultsErrorEvent"/*event name*/);
 		} else {
 			//when we get the movies results
@@ -51,10 +58,11 @@ define(["jquery", "underscore"], function($, _) {
 	};
 
 	command.prototype.handleDataLoadError = function(e) {
-		//when there are no movies dispatch an error event 
-			this.context.dispatch("loadResultsErrorEvent"/*event name*/);
+		//when there are no movies dispatch an error event
+		this.context.dispatch("loadResultsErrorEvent"/*event name*/);
 	};
 
 	return command;
+
 
 })
