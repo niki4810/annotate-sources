@@ -20,21 +20,10 @@ define(["jquery", "underscore"], function($, _) {
 			url : moviesSearchUrl + '&q=' + encodeURI(query) + pageLimit,
 			dataType : "jsonp",
 			success : function(data) {
-				if(console){
-					console.log(data);
-				}
 				that.handleDataLoadSuccess(data);
 			},
 			error : function(jqXHR, textStatus, errorThrown ) {
-				if(console){
-					console.log(errorThrown);
-				}
 				that.handleDataLoadError(errorThrown);
-			},
-			complete : function( jqXHR, textStatus){
-				if(console){
-					console.log(textStatus);
-				}
 			}
 		});
 
@@ -62,9 +51,6 @@ define(["jquery", "underscore"], function($, _) {
 	};
 
 	command.prototype.handleDataLoadError = function(e) {
-		if(console){
-			console.log(e);
-		}
 		//when there are no movies dispatch an error event 
 			this.context.dispatch("loadResultsErrorEvent"/*event name*/);
 	};
