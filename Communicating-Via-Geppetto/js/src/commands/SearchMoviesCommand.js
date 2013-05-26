@@ -20,6 +20,9 @@ define(["jquery", "underscore"], function($, _) {
 			url : moviesSearchUrl + '&q=' + encodeURI(query) + pageLimit,
 			dataType : "jsonp",
 			success : function(data) {
+				if(console){
+					console.log(data);
+				}
 				that.handleDataLoadSuccess(data);
 			},
 			error : function(e) {
