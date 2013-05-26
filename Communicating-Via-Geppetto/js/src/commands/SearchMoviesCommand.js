@@ -23,6 +23,9 @@ define(["jquery", "underscore"], function($, _) {
 				that.handleDataLoadSuccess(data);
 			},
 			error : function(e) {
+				if(console){
+					console.log(e);
+				}
 				that.handleDataLoadError(e);
 			}
 		});
