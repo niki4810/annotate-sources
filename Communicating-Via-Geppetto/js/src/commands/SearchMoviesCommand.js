@@ -25,11 +25,11 @@ define(["jquery", "underscore"], function($, _) {
 				}
 				that.handleDataLoadSuccess(data);
 			},
-			error : function(e) {
+			error : function(jqXHR, textStatus, errorThrown ) {
 				if(console){
-					console.log(e);
+					console.log(errorThrown);
 				}
-				that.handleDataLoadError(e);
+				that.handleDataLoadError(errorThrown);
 			}
 		});
 
