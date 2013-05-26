@@ -4,7 +4,7 @@ define([
 	"backbone", 
 	"marionette",
 	"geppetto", 
-	"text!src/templates/TableTemplate.html"
+	"text!src/templates/ResultViewTemplate.html"
 	],
  function(
  	$, 
@@ -12,9 +12,9 @@ define([
  	Backbone, 
  	Marionette,
  	Geppetto, 
- 	TableTemplate) {
+ 	ResultViewTemplate) {
 	var TableView = Marionette.ItemView.extend({
-		template: TableTemplate,
+		template: ResultViewTemplate,
 		className : "well span6 clearfix",
 		bindings : {
 				"title" : '[name = "title"]',

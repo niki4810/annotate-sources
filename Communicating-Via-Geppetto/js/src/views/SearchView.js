@@ -5,19 +5,19 @@ define(
 	"backbone", 
 	"marionette",
 	"geppetto",
-	"text!src/templates/EditorTemplate.html"
+	"text!src/templates/SearchViewTemplate.html"
 	],function(
 		$,
 		_,
 		Backbone,
 		Marionette,
 		Geppetto,
-		EditorTemplate
+		SearchViewTemplate
 	){
 	
 	
 	var EditorView = Marionette.ItemView.extend({
-		template : EditorTemplate,
+		template : SearchViewTemplate,
 		className : "well span4",
 		bindings : {
 				"title" : '[name = "title"]'
