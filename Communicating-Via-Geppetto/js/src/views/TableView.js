@@ -30,7 +30,10 @@ define([
 			//save the passed in context locally  such that
 			// we can dispatch or listen to events on this context
 			this.context = this.options.context;
-			this.context.listen(this, "loadResultsEvent", this.handleSearchResultsLoaded);
+			this.context.listen(this, "loadResultsSuccessEvent"/*event name*/, 
+								this.handleSearchResultsLoaded/*event listener*/);
+			this.context.listen(this, "loadResultsErrorEvent"/*event name*/, 
+								this.handleSearchResultsLoadError/*event listener*/);
 		},		
 		close : function() {
 			//when view closes, unbind Model bindings
@@ -47,6 +50,10 @@ define([
 		handleSearchResultsLoaded : function(data){
 			this.model.clear();
 			this.model.set(data);
+		},
+		handleSearchResultsLoadError : function(){
+			this.model.clear();
+			alert('Opps...something went wrong, try searching again');
 		}
 	});
 

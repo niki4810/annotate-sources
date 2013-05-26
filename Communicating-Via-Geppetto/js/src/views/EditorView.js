@@ -27,7 +27,7 @@ define(
 		},
 		searchClicked : function(e) {
 			if(this.model.get("title")){
-			this.context.dispatch("performSearchEvent",{data:this.model});
+			this.context.dispatch("performSearchEvent"/*event name*/,{data:this.model}/*event payload*/);
 			}else{
 				//if title is not set, shake the text input
 				//should have a required validator, but this would work
