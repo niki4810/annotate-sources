@@ -23,7 +23,6 @@ define(["jquery", "underscore"], function($, _) {
 				that.handleDataLoadSuccess(data);
 			},
 			error : function(e) {
-
 				that.handleDataLoadError(e);
 			}
 		});
@@ -52,6 +51,9 @@ define(["jquery", "underscore"], function($, _) {
 	};
 
 	command.prototype.handleDataLoadError = function(e) {
+		if(console){
+			console.log(e);
+		}
 		//when there are no movies dispatch an error event 
 			this.context.dispatch("loadResultsErrorEvent"/*event name*/);
 	};
