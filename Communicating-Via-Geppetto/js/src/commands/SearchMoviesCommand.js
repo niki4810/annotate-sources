@@ -7,20 +7,17 @@ define(["jquery", "underscore"], function($, _) {
 		_.bindAll(this);
 		var that = this;
 
-		/*var apikey = "78ejsdd76tc6jsffmrxjddxu";
+		var apikey = "78ejsdd76tc6jsffmrxjddxu";
 		var baseUrl = "http://api.rottentomatoes.com/api/public/v1.0";
 		var moviesSearchUrl = baseUrl + '/movies.json?apikey=' + apikey;
 		//get the movie title
 		var query = this.eventData.data.get("title");
 		var pageLimit = "&page_limit=1";
-*/
-		var url = "http://www.omdbapi.com/?t=";
-		var query = this.eventData.data.get("title");
+
 		//make an plain jquery ajax call to fetch the movie details using the
 		//rotten tomatoes public api's
 		$.ajax({
-			url :url + encodeURI(query),
-			
+			url : moviesSearchUrl + '&q=' + encodeURI(query) + pageLimit,
 			dataType : "jsonp",
 			success : function(data) {
 				that.handleDataLoadSuccess(data);
@@ -33,33 +30,23 @@ define(["jquery", "underscore"], function($, _) {
 	};
 
 	command.prototype.handleDataLoadSuccess = function(data) {
-		//var movies = data.movies;
+		var movies = data.movies;
 
-		//if (!data || !data.movies || data.movies.length <= 0) {
+		if (!data || !data.movies || data.movies.length <= 0) {
 			//when there are no movies dispatch an error event 
-			//this.context.dispatch("loadResultsErrorEvent"/*event name*/);
-		//} else {
+			this.context.dispatch("loadResultsErrorEvent"/*event name*/);
+		} else {
 			//when we get the movies results
 			//construct an object with movie details
-			//var resultObj = {};
-			//resultObj.rated = movies[0].mpaa_rating;
-			//resultObj.title = movies[0].title;
-		//	resultObj.rating = movies[0].ratings.audience_score;
-			//resultObj.year = movies[0].year;
-			//resultObj.poster = movies[0].posters.original;
+			var resultObj = {};
+			resultObj.rated = movies[0].mpaa_rating;
+			resultObj.title = movies[0].title;
+			resultObj.rating = movies[0].ratings.audience_score;
+			resultObj.year = movies[0].year;
+			resultObj.poster = movies[0].posters.original;
 			//dispatch an event on the context with movie details as payload
-			//this.context.dispatch("loadResultsSuccessEvent"/*event name*/, resultObj);
-	//	}
-
-		var resultObj = {};
-		resultObj.title = data.Title;
-		resultObj.rating = data.imdbRating;
-		resultObj.rated = data.Rated;
-		resultObj.year = data.Year;
-		resultObj.poster = data.Poster;
-		//dispatch an event on the context with movie details as payload
-		this.context.dispatch("loadResultsSuccessEvent"/*event name*/, resultObj); 
-
+			this.context.dispatch("loadResultsSuccessEvent"/*event name*/, resultObj);
+		}
 
 	};
 
