@@ -13,7 +13,7 @@ define([
  	Marionette,
  	Geppetto, 
  	ResultViewTemplate) {
-	var TableView = Marionette.ItemView.extend({
+	var ResultView = Marionette.ItemView.extend({
 		template: ResultViewTemplate,
 		className : "well span6 clearfix",
 		bindings : {
@@ -57,6 +57,6 @@ define([
 		}
 	});
 
-	return TableView;
+	return ResultView;
 
 })

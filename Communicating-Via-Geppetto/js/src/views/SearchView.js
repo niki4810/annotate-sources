@@ -16,7 +16,7 @@ define(
 	){
 	
 	
-	var EditorView = Marionette.ItemView.extend({
+	var SearchView = Marionette.ItemView.extend({
 		template : SearchViewTemplate,
 		className : "well span4",
 		bindings : {
@@ -61,5 +61,5 @@ define(
 		}
 	});
 
-	return EditorView;
+	return SearchView;
 })
